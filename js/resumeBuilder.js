@@ -18,6 +18,13 @@ var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
 var formattedName = HTMLheaderName.replace("%data%", bio.name);
 $("#header").prepend(formattedRole);
 $("#header").prepend(formattedName);
+if (bio.skills.length>0){
+  $("#header").append(HTMLskillsStart);
+  for (i in bio.skills){
+    var formattedSkill = HTMLskills.replace("%data%", bio.skills[i]);
+    $("#skills").append(formattedSkill);
+  }
+}
 
 var work = {
   "jobs":[
@@ -38,6 +45,18 @@ var work = {
     I also built a pretty awesome VBA project which automated two-thirds of my team leads job!"
   }]
 }
+work.display = function (){
+    for (i in work.jobs){
+      $("#workExperience").append(HTMLworkStart);
+      var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[i].employer);
+      var formattedJob_title = HTMLworkTitle.replace("%data%",work.jobs[i].job_title);
+      var formattedDates = HTMLworkDates.replace("%data%",work.jobs[i].years);
+      var formattedDescription = HTMLworkDescription.replace("%data%",work.jobs[i].description);
+      var work_info = formattedEmployer + formattedJob_title + formattedDates + formattedDescription;
+      $(".work-entry:last").append(work_info);
+    }
+}
+work.display();
 
 var education = {
   "schools":[
@@ -76,7 +95,6 @@ var project = {
     }
   ]
 }
-
 project.display = function(){
   for (i in project.projects){
     $("#projects").append(HTMLprojectStart);
@@ -91,32 +109,12 @@ project.display = function(){
     $(".project-entry:last").append(proj_info);
   }
 }
-
-if (bio.skills.length>0){
-  $("#header").append(HTMLskillsStart);
-  for (i in bio.skills){
-    var formattedSkill = HTMLskills.replace("%data%", bio.skills[i]);
-    $("#skills").append(formattedSkill);
-  }
-
-}
-
-function display_work(){
-    for (i in work.positions){
-      $("#workExperience").append(HTMLworkStart);
-      var formattedEmployer = HTMLworkEmployer.replace("%data%", work.positions[i].employer);
-      var formattedJob_title = HTMLworkTitle.replace("%data%",work.positions[i].job_title);
-      var formattedDates = HTMLworkDates.replace("%data%",work.positions[i].years);
-      var formattedDescription = HTMLworkDescription.replace("%data%",work.positions[i].description);
-      var work_info = formattedEmployer + formattedJob_title + formattedDates + formattedDescription;
-      $(".work-entry:last").append(work_info);
-    }
-}
-
-display_work();
-$("#main").append(internationalizeButton);
-
 project.display();
+
+
+
+// display_work();
+// $("#main").append(internationalizeButton);
 
 function internationalize_name(full_name){
   var split_name = full_name.split(" ");
