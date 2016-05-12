@@ -9,22 +9,37 @@ var bio = {
     "stack_overflow":"http://stackoverflow.com/users/4525451/doug-clarke",
     "location":"Alexandria, VA"
   },
-  "pictureURL":"",
-  "welcome-message":"Hello",
+  "pictureURL":"images/hiking.jpg",
+  "welcome_message":"Hello",
   "skills":["skill1","skill2"]
 };
+bio.display = function(){
 
-var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
-var formattedName = HTMLheaderName.replace("%data%", bio.name);
-$("#header").prepend(formattedRole);
-$("#header").prepend(formattedName);
-if (bio.skills.length>0){
-  $("#header").append(HTMLskillsStart);
-  for (i in bio.skills){
-    var formattedSkill = HTMLskills.replace("%data%", bio.skills[i]);
-    $("#skills").append(formattedSkill);
+  var role = HTMLheaderRole.replace("%data%", bio.role);
+  var name = HTMLheaderName.replace("%data%", bio.name);
+  $("#header").prepend(name+role)
+  var bioPic = HTMLbioPic.replace("%data%", bio.pictureURL);
+  $("#header").append(bioPic);
+  if (bio.skills.length>0){
+    $("#header").append(HTMLskillsStart);
+    for (i in bio.skills){
+      var formattedSkill = HTMLskills.replace("%data%", bio.skills[i]);
+      $("#skills").append(formattedSkill);
+    }
   }
+  var phone = HTMLmobile.replace("%data%", bio.contacts.phone);
+  var email = HTMLemail.replace("%data%", bio.contacts.email);
+  var github = HTMLgithub.replace("%data%", bio.contacts.github);
+  var linkIn = HTMLcontactGeneric.replace("%data%", bio.contacts.linkedIn);
+  linkIn = linkIn.replace("%contact%", "LinkedIn");
+  var stack_overflow = HTMLcontactGeneric.replace("%data%", bio.contacts.stack_overflow);
+  stack_overflow = stack_overflow.replace("%contact%", "Stack Overflow");
+  var location = HTMLlocation.replace("%data%", bio.contacts.location);
+  var contactConcat = phone + email + github + linkIn + stack_overflow + location;
+  $("#topContacts").append(contactConcat);
+  $("#footerContacts").append(contactConcat);
 }
+bio.display();
 
 var work = {
   "jobs":[
@@ -61,23 +76,50 @@ work.display();
 var education = {
   "schools":[
     {
+      "school_name":"Udacity",
+      "years_attended":2016,
+      "location":"Online Program",
+      "degree":"Nanodegree",
+      "major":"Front-End Web Developer"
+    },
+    {
+      "school_name":"BLOC",
+      "years_attended":2015,
+      "location":"Online Program",
+      "degree":"non-degree program",
+      "major":"Rails Web Development"
+    },
+    {
       "school_name":"UMBC",
-      "years_attended":"2007-2012",
+      "years_attended":2012,
       "location":"Baltimore, MD",
       "degree":"BS",
       "major":"Financial Economics"
-    }],
-  "online-programs":[
+    }
+  ],
+  "onlineCourses":[
     {
-      "school_name":"BLOC",
-      "years_attended":"2015",
-      "location":"Online",
-      "degree":"none",
-      "major":"Back End Web Development"
+      "title":"",
+      "school":"",
+      "date":"",
+      "url":""
     }
   ]
-
 }
+education.display = function (){
+    for (i in education.schools){
+      $("#education").append(HTMLschoolStart);
+      var name = HTMLschoolName.replace("%data%", education.schools[i].school_name);
+      var degree = HTMLschoolDegree.replace("%data%", education.schools[i].degree);
+      var dates = HTMLschoolDates.replace("%data%", education.schools[i].years_attended);
+      var location = HTMLschoolLocation.replace("%data%", education.schools[i].location);
+      var major = HTMLschoolMajor.replace("%data%", education.schools[i].major);
+      var school_info = name + location + degree + dates + major;
+      $(".education-entry:last").append(school_info);
+    }
+}
+education.display();
+
 
 var project = {
   "projects":[
@@ -111,15 +153,13 @@ project.display = function(){
 }
 project.display();
 
-
-
 // display_work();
 // $("#main").append(internationalizeButton);
 
-function internationalize_name(full_name){
-  var split_name = full_name.split(" ");
-  var int_name = split_name[0].slice(0,1).toUpperCase()+ split_name[0].slice(1) + " " + split_name[1].toUpperCase();
-  return int_name;
-}
+// function internationalize_name(full_name){
+//   var split_name = full_name.split(" ");
+//   var int_name = split_name[0].slice(0,1).toUpperCase()+ split_name[0].slice(1) + " " + split_name[1].toUpperCase();
+//   return int_name;
+// }
 
 $("#mapDiv").append(googleMap);
