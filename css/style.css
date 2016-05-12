@@ -26,7 +26,7 @@ h6 {
 
 h1 {
   font-size: 40px;
-  color: #f5a623;
+  color: rgb(0, 226, 59);
   line-height: 48px;
   display: inline;
 }
@@ -100,16 +100,16 @@ a {
 }
 
 #skills-h3 {
-  color: #f5ae23;
+  color: rgb(0, 183, 47);
   display: none;
 }
 
-.orange {
-  background-color: #f5ae23;
+.theme-color {
+  background-color: rgb(0, 183, 47);
 }
 
-.orange-text {
-  color: #f5ae23;
+.theme-color-text {
+  color: rgb(0, 183, 47);
 }
 
 .white-text {
@@ -166,6 +166,10 @@ span {
 
 #lets-connect {
   text-align: center;
+}
+
+.footer-text{
+  color:#6C6C6C
 }
 
 /* Media queries to handle various device widths */

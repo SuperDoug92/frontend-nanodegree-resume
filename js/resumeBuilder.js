@@ -35,7 +35,7 @@ bio.display = function(){
   var stack_overflow = HTMLcontactGeneric.replace("%data%", bio.contacts.stack_overflow);
   stack_overflow = stack_overflow.replace("%contact%", "Stack Overflow");
   var location = HTMLlocation.replace("%data%", bio.contacts.location);
-  var contactConcat = phone + email + github + linkIn + stack_overflow + location;
+  var contactConcat = phone + email + github + location;
   $("#topContacts").append(contactConcat);
   $("#footerContacts").append(contactConcat);
 }
